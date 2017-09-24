@@ -36,7 +36,7 @@ $db['default'] = array(
 );
 ```
 ### Utilizando o projeto
-Após a preparação de ambiente, e de clonar o projeto, o mesmo estará disponível em  em [http://localhost/dz](http://localhost/dz) caso tenha feito a instalação padrão.
+Após a preparação de ambiente, e de clonar o projeto, o mesmo estará disponível em  em [http://localhost/dz](http://localhost/dz) .
 
 ##### Acesso ao painel administrativo
 Para visualizar o painel de cadastro de quiz acesse [http://localhost/dz/index.php/admin](http://localhost/dz/index.php/admin)
