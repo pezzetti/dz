@@ -21,8 +21,7 @@
 							 </div>                                     
 					    <?php endforeach;?>             
                     </div>                         
-            	<?php endforeach;?>
-            	<input type="hidden" name="quiz_id" value="<?=$quiz_id;?>">
+            	<?php endforeach;?>            	
                 <button type="submit" class="btn btn-success">Enviar</button>
             </form>
         </div>

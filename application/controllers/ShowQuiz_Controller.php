@@ -15,7 +15,7 @@ class ShowQuiz_Controller extends Base_Controller {
      */
 
     public function index() {
-         $quizzes['quizzes'] = $this->quizzes_model->read();
+        $quizzes['quizzes'] = $this->quizzes_model->read();
         $this->load_view('quizzes/index',$quizzes);
     }
 
@@ -39,18 +39,8 @@ class ShowQuiz_Controller extends Base_Controller {
     }
 
     public function result(){
-        $options_post = $this->input->post();
-        $quiz_id = $this->input->post('quiz_id');
-        array_pop($options_post);
-        $options = array();
-        foreach ($options_post as $question => $option_id){
-            $options[] = $option_id;
-        }
-        $options = array_reverse($options); // Como os testes descrito na historia sugere, a contagem vale pela ultima alternativa até a primeira.
-        $options_count = array_count_values($options); // Count repeated options
-        arsort($options_count); // order by most repeated 
-        reset($options_count); // point to first element
-        $most_selected_option_id = key($options_count);  // get key of first element  
+        $options_post = $this->input->post();       
+        $most_selected_option_id = $this->get_most_selected_option($options_post);
         $data["result"] = $this->options_model->get_result($most_selected_option_id);
         $this->load_view('quizzes/result',$data);
     }
@@ -79,6 +69,43 @@ class ShowQuiz_Controller extends Base_Controller {
         } else {
             redirect('quizzes');
         }
+    }
+
+    public function get_most_selected_option($_options_post){
+        $options = array();
+        foreach ($_options_post as $question => $option_id){
+            $options[] = $option_id;
+        }
+
+        $options_reverse = array_reverse($options); 
+        $options_count = array_count_values($options_reverse); 
+        arsort($options_count);               
+        $first_option_count = reset($options_count);
+        $first_option_question_id = key($options_count);
+        $second_option_count = reset(array_slice($options_count, 1, 1, true));  
+        
+        //se não há empate manda o que tem mais escolhas
+        if($first_option_count > $second_option_count)
+            return $first_option_question_id;
+        else{
+            //Deu empate nas opcoes ex (a,a,b,b,c)
+            //usa peso para ver qual a opção correta            
+            $values = array(1,7,13,17,21);    
+            for($i = 0; $i< 5; $i++){
+                $option_value[] = array($options[$i]=>$values[$i]);
+            }
+
+            $sumArray = array();
+            foreach ($option_value as $key=>$subArray) {
+              foreach ($subArray as $id=>$value) {
+                $sumArray[$id]+=$value;
+              }
+            }
+            arsort($sumArray);       
+            reset($sumArray);
+            $first_key = key($sumArray);                     
+            return $first_key; 
+        }              
     }
 
 
