@@ -90,7 +90,7 @@ class ShowQuiz_Controller extends Base_Controller {
         else{
             //Deu empate nas opcoes ex (a,a,b,b,c)
             //usa peso para ver qual a opção correta            
-            $values = array(1,7,13,17,21);    
+            $values = array(1,3,5,13,16);    
             for($i = 0; $i< 5; $i++){
                 $option_value[] = array($options[$i]=>$values[$i]);
             }
@@ -101,7 +101,9 @@ class ShowQuiz_Controller extends Base_Controller {
                 $sumArray[$id]+=$value;
               }
             }
-            arsort($sumArray);       
+            arsort($sumArray);   
+          //  var_dump($options);  
+          //  var_dump($sumArray); 
             reset($sumArray);
             $first_key = key($sumArray);                     
             return $first_key; 
