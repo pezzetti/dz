@@ -1,17 +1,16 @@
-# DZ Teste Quiz #
+# DZ Quiz #
 
 
-Utilizado Framework CodeIgniter
+Made with CodeIgniter
 
-### Instalação padrão
-Faça o clone do projeto dentro do www/htdocs do seu apache:
+### How to install
+Clone repository
 ``` ssh
 $ git clone https://github.com/pezzetti/dz.git 
 ```
-Importe *dz.sql* que se encontra dentro da raiz do projeto para o seu MySql.
+Import *dz.sql* on the root path to your MySQL database.
 
-Altere as configurações em *application/config/database.php*:
-Exemplo:
+Change the database connection in *application/config/database.php*:
 ``` php
 $db['default'] = array(
 	'dsn'	=> '',
@@ -35,13 +34,13 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 ```
-### Utilizando o projeto
-Após a preparação de ambiente, e de clonar o projeto, o mesmo estará disponível em  em [http://localhost/dz](http://localhost/dz) .
+### How to use
+Access [http://localhost/dz](http://localhost/dz) .
 
-##### Acesso ao painel administrativo
-Para visualizar o painel de cadastro de quiz acesse [http://localhost/dz/index.php/admin](http://localhost/dz/index.php/admin)
+##### Backoffice access
+To create a quiz, access [http://localhost/dz/index.php/admin](http://localhost/dz/index.php/admin)
 
-Usuário e senha para acesso ao painel de administração:
+Credentials
 ``` php
 login: admin
 password: admin
